@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IntegrationCategory } from "@/components/integration-category";
 import type { IntegrationCategory as IIntegrationCategory } from "@/types/integration";
+import { supabase } from "@/lib/supabase";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const initialCategories: IIntegrationCategory[] = [
   {
@@ -130,20 +132,71 @@ const initialCategories: IIntegrationCategory[] = [
 ];
 
 const Index = () => {
-  const [categories, setCategories] = useState<IIntegrationCategory[]>(initialCategories);
+  const queryClient = useQueryClient();
+  
+  const { data: categories = initialCategories, isLoading } = useQuery({
+    queryKey: ['integrations'],
+    queryFn: async () => {
+      const { data: connections } = await supabase
+        .from('integration_connections')
+        .select('integration_id, connected');
+
+      return initialCategories.map(category => ({
+        ...category,
+        integrations: category.integrations.map(integration => ({
+          ...integration,
+          connected: connections?.find(conn => conn.integration_id === integration.id)?.connected || false
+        }))
+      }));
+    }
+  });
+
+  const toggleConnectionMutation = useMutation({
+    mutationFn: async ({ integrationId, connected }: { integrationId: string; connected: boolean }) => {
+      const { data, error } = await supabase
+        .from('integration_connections')
+        .upsert(
+          { integration_id: integrationId, connected },
+          { onConflict: 'integration_id' }
+        );
+
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['integrations'] });
+    }
+  });
 
   const handleToggleConnection = (integrationId: string) => {
-    setCategories((prevCategories) =>
-      prevCategories.map((category) => ({
-        ...category,
-        integrations: category.integrations.map((integration) =>
-          integration.id === integrationId
-            ? { ...integration, connected: !integration.connected }
-            : integration
-        ),
-      }))
+    const category = categories.find(cat => 
+      cat.integrations.some(int => int.id === integrationId)
     );
+    const integration = category?.integrations.find(int => int.id === integrationId);
+    
+    if (integration) {
+      toggleConnectionMutation.mutate({
+        integrationId,
+        connected: !integration.connected
+      });
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto py-8 px-4">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded w-1/4 mb-4"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/2 mb-8"></div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((n) => (
+              <div key={n} className="h-48 bg-gray-200 rounded"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-8 px-4">
