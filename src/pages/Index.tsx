@@ -134,12 +134,18 @@ const initialCategories: IIntegrationCategory[] = [
 const Index = () => {
   const queryClient = useQueryClient();
   
+  // Fetch integrations data with connection states
   const { data: categories = initialCategories, isLoading } = useQuery({
     queryKey: ['integrations'],
     queryFn: async () => {
-      const { data: connections } = await supabase
+      const { data: connections, error } = await supabase
         .from('integration_connections')
         .select('integration_id, connected');
+
+      if (error) {
+        console.error('Error fetching connections:', error);
+        throw error;
+      }
 
       return initialCategories.map(category => ({
         ...category,
@@ -151,16 +157,24 @@ const Index = () => {
     }
   });
 
+  // Mutation for toggling connection state
   const toggleConnectionMutation = useMutation({
     mutationFn: async ({ integrationId, connected }: { integrationId: string; connected: boolean }) => {
       const { data, error } = await supabase
         .from('integration_connections')
         .upsert(
-          { integration_id: integrationId, connected },
+          { 
+            integration_id: integrationId, 
+            connected,
+            updated_at: new Date().toISOString()
+          },
           { onConflict: 'integration_id' }
         );
 
-      if (error) throw error;
+      if (error) {
+        console.error('Error updating connection:', error);
+        throw error;
+      }
       return data;
     },
     onSuccess: () => {
