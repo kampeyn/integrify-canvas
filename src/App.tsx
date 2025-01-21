@@ -12,7 +12,8 @@ import Auth from "./pages/Auth"
 import Landing from "./pages/Landing"
 import Integrations from "./pages/dashboard/Integrations"
 import Profile from "./pages/dashboard/Profile"
-import Pricing from "./pages/Pricing"
+import Pricing from "./pages/pricing/index"
+import { ReactNode } from "react";
 
 const queryClient = new QueryClient()
 
