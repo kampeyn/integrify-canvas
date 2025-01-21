@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import type { IntegrationCategory } from "@/types/integration";
 
@@ -131,6 +132,29 @@ const initialCategories: IntegrationCategory[] = [
 
 export const useIntegrations = () => {
   const queryClient = useQueryClient();
+
+  // Set up real-time subscription
+  useEffect(() => {
+    const channel = supabase
+      .channel('integration-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'integration_connections'
+        },
+        () => {
+          // Invalidate and refetch when changes occur
+          queryClient.invalidateQueries({ queryKey: ['integrations'] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [queryClient]);
 
   const { data: categories = initialCategories, isLoading } = useQuery({
     queryKey: ['integrations'],

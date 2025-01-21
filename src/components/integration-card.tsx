@@ -28,25 +28,28 @@ export function IntegrationCard({
   };
 
   return (
-    <Card className="w-full transition-all hover:shadow-md">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg font-semibold">{name}</CardTitle>
+    <Card className="w-full transition-all hover:shadow-md animate-in fade-in slide-in-from-bottom duration-500">
+      <CardHeader className="pb-2 space-y-1">
+        <CardTitle className="text-lg font-semibold line-clamp-1">{name}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground mb-4">{description}</p>
-        <div className="flex items-center justify-between">
+      <CardContent className="space-y-4">
+        <p className="text-sm text-muted-foreground line-clamp-2 min-h-[2.5rem]">
+          {description}
+        </p>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-blue-500 hover:underline"
+            className="text-sm text-blue-500 hover:underline truncate max-w-[200px]"
           >
             Visit website
           </a>
           <Button
             variant={connected ? "destructive" : "default"}
             onClick={handleToggle}
-            className="w-28"
+            className="w-full sm:w-28"
+            size="sm"
           >
             {connected ? "Disconnect" : "Connect"}
           </Button>

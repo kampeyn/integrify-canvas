@@ -15,12 +15,12 @@ export function IntegrationCategory({
   onToggleConnection,
 }: IntegrationCategoryProps) {
   return (
-    <div className="mb-8">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold mb-2">{title}</h2>
-        <p className="text-muted-foreground">{description}</p>
+    <div className="mb-8 animate-in fade-in slide-in-from-bottom duration-500">
+      <div className="mb-6 px-4 md:px-0">
+        <h2 className="text-2xl font-bold mb-3">{title}</h2>
+        <p className="text-muted-foreground text-sm md:text-base">{description}</p>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 md:px-0">
         {integrations.map((integration) => (
           <IntegrationCard
             key={integration.id}
