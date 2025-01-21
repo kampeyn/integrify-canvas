@@ -4,7 +4,6 @@ import { Auth as SupabaseAuth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/lib/supabase";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import type { AuthError } from "@supabase/supabase-js";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -25,21 +24,6 @@ const Auth = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
-
-  const handleError = (error: AuthError) => {
-    console.error("Auth error:", error);
-    
-    switch (error.message) {
-      case "Email not confirmed":
-        setError("Please check your email to confirm your account before signing in.");
-        break;
-      case "Invalid login credentials":
-        setError("Invalid email or password. Please try again.");
-        break;
-      default:
-        setError(error.message);
-    }
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -76,7 +60,6 @@ const Auth = () => {
             theme="light"
             providers={[]}
             redirectTo={window.location.origin}
-            onError={handleError}
           />
         </div>
       </div>

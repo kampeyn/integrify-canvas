@@ -145,7 +145,6 @@ export const useIntegrations = () => {
           table: 'integration_connections'
         },
         () => {
-          // Invalidate and refetch when changes occur
           queryClient.invalidateQueries({ queryKey: ['integrations'] });
         }
       )
@@ -159,9 +158,13 @@ export const useIntegrations = () => {
   const { data: categories = initialCategories, isLoading } = useQuery({
     queryKey: ['integrations'],
     queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('User not authenticated');
+
       const { data: connections, error } = await supabase
         .from('integration_connections')
-        .select('integration_id, connected');
+        .select('integration_id, connected')
+        .eq('user_id', user.id);
 
       if (error) {
         console.error('Error fetching connections:', error);
@@ -180,15 +183,19 @@ export const useIntegrations = () => {
 
   const toggleConnectionMutation = useMutation({
     mutationFn: async ({ integrationId, connected }: { integrationId: string; connected: boolean }) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('User not authenticated');
+
       const { data, error } = await supabase
         .from('integration_connections')
         .upsert(
           { 
             integration_id: integrationId, 
             connected,
-            updated_at: new Date().toISOString()
+            updated_at: new Date().toISOString(),
+            user_id: user.id
           },
-          { onConflict: 'integration_id' }
+          { onConflict: 'integration_id,user_id' }
         );
 
       if (error) {
