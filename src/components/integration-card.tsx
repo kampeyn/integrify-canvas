@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { useApiIntegration } from "@/hooks/use-api-integration";
 
 interface IntegrationCardProps {
   name: string;
@@ -17,14 +17,19 @@ export function IntegrationCard({
   connected,
   onToggleConnection,
 }: IntegrationCardProps) {
-  const { toast } = useToast();
+  const { connectApi, disconnectApi, isLoading } = useApiIntegration({
+    integrationId: name.toLowerCase().replace(/\s+/g, '_'),
+    onSuccess: onToggleConnection,
+  });
 
-  const handleToggle = () => {
-    onToggleConnection();
-    toast({
-      title: connected ? "Disconnected" : "Connected",
-      description: `Successfully ${connected ? "disconnected from" : "connected to"} ${name}`,
-    });
+  const handleToggle = async () => {
+    if (connected) {
+      await disconnectApi();
+    } else {
+      // For now, we'll just pass an empty object as credentials
+      // In a real implementation, you'd want to show a modal or form to collect API keys
+      await connectApi({});
+    }
   };
 
   return (
@@ -50,8 +55,9 @@ export function IntegrationCard({
             onClick={handleToggle}
             className="w-full sm:w-28"
             size="sm"
+            disabled={isLoading}
           >
-            {connected ? "Disconnect" : "Connect"}
+            {isLoading ? "Loading..." : connected ? "Disconnect" : "Connect"}
           </Button>
         </div>
       </CardContent>
