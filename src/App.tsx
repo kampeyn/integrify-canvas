@@ -10,8 +10,8 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import Index from "./pages/Index"
 import Auth from "./pages/Auth"
 import Landing from "./pages/Landing"
-import Integrations from "./pages/Integrations"
-import Profile from "./pages/Profile"
+import Integrations from "./pages/dashboard/Integrations"
+import Profile from "./pages/dashboard/Profile"
 import Pricing from "./pages/Pricing"
 
 const queryClient = new QueryClient()
