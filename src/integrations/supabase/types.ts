@@ -16,6 +16,7 @@ export type Database = {
           id: number
           integration_id: string
           updated_at: string
+          user_id: string
         }
         Insert: {
           connected?: boolean
@@ -23,6 +24,7 @@ export type Database = {
           id?: number
           integration_id: string
           updated_at?: string
+          user_id: string
         }
         Update: {
           connected?: boolean
@@ -30,6 +32,34 @@ export type Database = {
           id?: number
           integration_id?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
