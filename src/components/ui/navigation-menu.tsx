@@ -2,6 +2,7 @@ import * as React from "react"
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu"
 import { cva } from "class-variance-authority"
 import { ChevronDown } from "lucide-react"
+import { Link, useLocation } from 'react-router-dom';
 
 import { cn } from "@/lib/utils"
 
@@ -115,9 +116,40 @@ const NavigationMenuIndicator = React.forwardRef<
 NavigationMenuIndicator.displayName =
   NavigationMenuPrimitive.Indicator.displayName
 
+const isActive = (path) => { return window.location.pathname === path; };
+
+const NavigationMenuComponent = () => {
+  const location = useLocation();
+
+  return (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <Link to="/" className={cn('nav-link', { 'active': isActive('/') })}>Home</Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link to="/pricing" className={cn('nav-link', { 'active': isActive('/pricing') })}>Pricing</Link>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link to="/dashboard" className={cn('nav-link', { 'active': isActive('/dashboard') })}>Dashboard</Link>
+        </NavigationMenuItem>
+        {location.pathname !== '/auth/login' && location.pathname !== '/auth/signup' ? (
+          <NavigationMenuItem>
+            <Link to="/auth/login" className={cn('nav-link', { 'active': isActive('/auth/login') })}>Login</Link>
+          </NavigationMenuItem>
+        ) : (
+          <NavigationMenuItem>
+            <Link to="/auth/signup" className={cn('nav-link', { 'active': isActive('/auth/signup') })}>Sign Up</Link>
+          </NavigationMenuItem>
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}
+
 export {
   navigationMenuTriggerStyle,
-  NavigationMenu,
+  NavigationMenuComponent as NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuContent,

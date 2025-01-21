@@ -10,6 +10,9 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import Index from "./pages/Index"
 import Auth from "./pages/Auth"
 import Landing from "./pages/Landing"
+import Integrations from "./pages/Integrations"
+import Profile from "./pages/Profile"
+import Pricing from "./pages/Pricing"
 
 const queryClient = new QueryClient()
 
@@ -52,31 +55,12 @@ const App = () => (
         <Routes>
           <Route path="/landing" element={<Landing />} />
           <Route path="/auth" element={<Auth />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            }
-          />
-          {/* Placeholder routes for future implementation */}
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <div className="text-center">Profile page coming soon</div>
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute>
-                <div className="text-center">Settings page coming soon</div>
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
+            <Route path="integrations" element={<Integrations />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+          <Route path="/pricing" element={<Pricing />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
