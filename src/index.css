@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 95%; /* Modified --background color for default toast */
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -25,7 +25,7 @@
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84.2% 40%; /* Modified --destructive color */
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
