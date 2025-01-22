@@ -37,7 +37,17 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   if (loading) {
-    return <div>Loading...</div>
+    return (
+      <DashboardLayout>
+        <div className="container py-6">
+          <Skeleton className="h-10 w-[200px] mb-4" />
+          <Skeleton className="h-4 w-full mb-2" />
+          <Skeleton className="h-4 w-full mb-2" />
+          <Skeleton className="h-4 w-full mb-2" />
+          <Skeleton className="h-4 w-full" />
+        </div>
+      </DashboardLayout>
+    );
   }
 
   if (!session) {
@@ -56,7 +66,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout>{children}</DashboardLayout></ProtectedRoute>}>
+          <Route path="/dashboard" element={<ProtectedRoute>{children}</ProtectedRoute>}>
             <Route path="integrations" element={<Integrations />} />
             <Route path="profile" element={<Profile />} />
           </Route>

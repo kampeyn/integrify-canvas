@@ -14,7 +14,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 const menuItems = [
   {
     title: "Integrations",
-    url: "/",
+    url: "/dashboard/integrations",
     icon: Home,
   },
   {
