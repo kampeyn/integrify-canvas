@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Toaster as Sonner } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Session } from "@supabase/supabase-js"
 import { supabase } from "@/lib/supabase"
@@ -63,17 +63,15 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/dashboard" element={<ProtectedRoute><Index /></ProtectedRoute>}>
-            <Route path="integrations" element={<Integrations />} />
-            <Route path="profile" element={<Profile />} />
-          </Route>
-          <Route path="/pricing" element={<Pricing />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Index /></ProtectedRoute>}>
+          <Route path="integrations" element={<Integrations />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+        <Route path="/pricing" element={<Pricing />} />
+      </Routes>
     </TooltipProvider>
   </QueryClientProvider>
 )
