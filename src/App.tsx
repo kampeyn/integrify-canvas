@@ -14,6 +14,7 @@ import Integrations from "./pages/dashboard/Integrations"
 import Profile from "./pages/dashboard/Profile"
 import Pricing from "./pages/pricing/index"
 import { ReactNode } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const queryClient = new QueryClient()
 
