@@ -14,10 +14,10 @@ const Auth = () => {
       console.log("Auth state changed:", event);
       
       if (event === "SIGNED_IN") {
-        navigate("/");
+        navigate("/dashboard");
       } else if (event === "USER_UPDATED") {
         if (session?.user.email_confirmed_at) {
-          navigate("/");
+          navigate("/dashboard");
         }
       }
     });

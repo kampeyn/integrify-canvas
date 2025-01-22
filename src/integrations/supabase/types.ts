@@ -9,30 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      integrations: {
-        Row: {
-          id: number;
-          name: string;
-          description: string | null;
-          created_at: string | null;
-          updated_at: string | null;
-        };
-        Insert: {
-          id?: number;
-          name: string;
-          description?: string | null;
-          created_at?: string | null;
-          updated_at?: string | null;
-        };
-        Update: {
-          id?: number;
-          name?: string;
-          description?: string | null;
-          created_at?: string | null;
-          updated_at?: string | null;
-        };
-        Relationships: [];
-      }
       integration_connections: {
         Row: {
           connected: boolean
@@ -93,6 +69,30 @@ export type Database = {
           token_expires_at?: string | null
           updated_at?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      integrations: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: number
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          name?: string
+          updated_at?: string | null
         }
         Relationships: []
       }
