@@ -33,21 +33,21 @@ export function HeroSection({
     <section className="relative overflow-hidden bg-background pt-16">
       <div className="container relative z-10 mx-auto px-4 pt-24 sm:px-6 lg:pt-32">
         <div className="mx-auto max-w-[800px] text-center">
-          {/* Main Heading */}
-          <h1 className="mb-8 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          {/* Main Heading (now subtitle size) */}
+          <h1 className="mb-8 text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
             {title}
           </h1>
 
-          {/* Subheading with Gradient */}
-          <h2 className="mb-8 text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
+          {/* Subheading with Gradient (now headline size) */}
+          <h2 className="mb-8 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             <span className="text-foreground">{subtitle.regular}</span>{" "}
             <span className="bg-gradient-to-r from-purple-500 to-purple-300 bg-clip-text text-transparent">
               {subtitle.gradient}
             </span>
           </h2>
 
-          {/* Description */}
-          <p className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground/80 sm:text-xl">
+          {/* Description (paragraph size) */}
+          <p className="mx-auto mb-12 max-w-2xl text-base text-muted-foreground/80 sm:text-lg">
             {description}
           </p>
 
