@@ -19,7 +19,7 @@ const menuItems = [
   },
   {
     title: "Profile",
-    url: "/profile",
+    url: "/dashboard/profile",
     icon: User,
   },
   {

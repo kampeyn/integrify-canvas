@@ -28,7 +28,8 @@ export function IntegrationCard({
     } else {
       // For now, we'll just pass an empty object as credentials
       // In a real implementation, you'd want to show a modal or form to collect API keys
-      await connectApi({});
+      // alert("API Key input is not yet implemented. Please check back later!"); // Temporary alert
+      await connectApi({}); // Placeholder - replace with proper credentials handling
     }
   };
 

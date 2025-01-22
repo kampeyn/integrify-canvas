@@ -38,7 +38,7 @@ export const useApiIntegration = ({
       console.error("Error connecting integration:", error);
       toast({
         title: "Connection Failed",
-        description: error.message,
+        description: error?.message || "Failed to connect integration. Please try again.",
         variant: "destructive",
       });
       onError?.(error);
@@ -69,7 +69,7 @@ export const useApiIntegration = ({
       console.error("Error disconnecting integration:", error);
       toast({
         title: "Disconnection Failed",
-        description: error.message,
+        description: error?.message || "Failed to disconnect integration. Please try again.",
         variant: "destructive",
       });
       onError?.(error);

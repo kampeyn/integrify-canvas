@@ -2,6 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import type { IntegrationCategory } from "@/types/integration";
+import { useToast } from "./use-toast"; // Import useToast hook
 
 const initialCategories: IntegrationCategory[] = [
   {
@@ -132,6 +133,7 @@ const initialCategories: IntegrationCategory[] = [
 
 export const useIntegrations = () => {
   const queryClient = useQueryClient();
+  const { toast } = useToast(); // Initialize useToast hook
 
   // Set up real-time subscription
   useEffect(() => {
@@ -206,24 +208,37 @@ export const useIntegrations = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['integrations'] });
-    }
+    },
+    onError: (error) => { // Add onError callback
+      toast({
+        title: "Failed to toggle integration",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
   });
 
   return {
     categories,
     isLoading,
     toggleConnection: (integrationId: string) => {
-      const category = categories?.find(cat => 
-        cat.integrations.some(int => int.id === integrationId)
-      );
-      const integration = category?.integrations.find(int => int.id === integrationId);
-      
-      if (integration) {
-        toggleConnectionMutation.mutate({
+      toggleConnectionMutation.mutate(
+        {
           integrationId,
-          connected: !integration.connected
-        });
-      }
+          connected: !categories?.find(cat => 
+            cat.integrations.some(int => int.id === integrationId)
+          )?.integrations.find(int => int.id === integrationId)?.connected
+        },
+        {
+          onError: (error) => {
+            toast({
+              title: "Failed to toggle integration",
+              description: error.message,
+              variant: "destructive",
+            });
+          },
+        }
+      );
     }
   };
 };
