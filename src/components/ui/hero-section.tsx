@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { Link } from "react-router-dom"
 
 interface HeroSectionProps {
   title: string
@@ -52,17 +53,17 @@ export function HeroSection({
 
           {/* CTA Buttons */}
           <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-6">
-            <Button size="lg" href={ctaHref} className="text-base sm:text-lg">
-              {ctaText}
+            <Button asChild size="lg" className="text-base sm:text-lg">
+              <Link to={ctaHref}>{ctaText}</Link>
             </Button>
             {secondaryCtaText && secondaryCtaHref && (
               <Button
+                asChild
                 size="lg"
                 variant="outline"
-                href={secondaryCtaHref}
                 className="text-base sm:text-lg"
               >
-                {secondaryCtaText}
+                <Link to={secondaryCtaHref}>{secondaryCtaText}</Link>
               </Button>
             )}
           </div>
