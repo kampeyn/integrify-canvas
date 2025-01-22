@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { HeroSection } from "@/components/ui/hero-section"
 import { useNavigate } from "react-router-dom"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/components/theme-provider/use-theme"
 
 const Landing = () => {
   const navigate = useNavigate()
