@@ -9,8 +9,9 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="container fixed left-0 right-0 top-0 z-50 mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      {/* Navigation */}
+      <nav className="fixed left-0 right-0 top-0 z-50 border-b bg-background/80 backdrop-blur-sm">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
           <div className="text-2xl font-bold text-primary">Outraise</div>
           <Button variant="outline" onClick={() => navigate("/auth")}>
             Sign In
@@ -18,57 +19,81 @@ const Landing = () => {
         </div>
       </nav>
 
+      {/* Hero Section */}
       <HeroSection>
-        <div className="container relative z-10 mx-auto px-6">
-          <div className="mx-auto max-w-4xl text-center">
-            <h1 className="mb-6 text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+        <main className="container relative z-10 mx-auto px-4 pt-24 sm:px-6 lg:pt-32">
+          <div className="mx-auto max-w-[800px] text-center">
+            {/* Main Heading */}
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               New Generation of Automation
             </h1>
-            <h2 className="mb-4 text-3xl font-semibold sm:text-4xl">
+
+            {/* Subheading with Gradient */}
+            <h2 className="mb-6 text-2xl font-semibold sm:text-3xl md:text-4xl">
               <span className="text-foreground">Intent-Driven </span>
               <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
                 Fundraising Engagement
               </span>
             </h2>
-            <p className="mb-8 text-xl text-muted-foreground">
+
+            {/* Description */}
+            <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
               Capture intent signals to gain full visibility into who and how to contact next — efficiently
               increasing your revenue and shortening your fundraising cycle.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-              <Button size="lg" onClick={() => navigate("/signup")}>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-6">
+              <Button
+                size="lg"
+                onClick={() => navigate("/signup")}
+                className="text-base sm:text-lg"
+              >
                 Try for Free
               </Button>
-              <Button size="lg" variant="outline">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-base sm:text-lg"
+              >
                 Learn More About Outraise
               </Button>
             </div>
           </div>
 
-          <div className="mt-16 flex justify-center">
-            <img
-              src={theme === "dark" ? "/assets/outraise-dashboard-dark.png" : "/assets/outraise-dashboard-light.png"}
-              alt="Outraise Dashboard"
-              className="rounded-lg shadow-2xl"
-              width={1200}
-              height={675}
-            />
+          {/* Dashboard Preview */}
+          <div className="mt-16 sm:mt-20 lg:mt-24">
+            <div className="relative mx-auto max-w-5xl">
+              <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-gray-900/10">
+                <img
+                  src={theme === "dark" ? "/assets/outraise-dashboard-dark.png" : "/assets/outraise-dashboard-light.png"}
+                  alt="Outraise Dashboard"
+                  className="w-full"
+                  width={1200}
+                  height={675}
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        </main>
       </HeroSection>
 
-      <div className="container mx-auto px-6 py-20">
+      {/* Features Section */}
+      <section className="container mx-auto px-4 py-20 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <div
               key={feature.title}
               className="rounded-lg bg-card p-6 shadow-lg transition-transform hover:scale-105"
             >
-              <h3 className="mb-3 text-xl font-semibold text-card-foreground">{feature.title}</h3>
+              <h3 className="mb-3 text-xl font-semibold text-card-foreground">
+                {feature.title}
+              </h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </div>
           ))}
         </div>
-      </div>
+      </section>
     </div>
   )
 }
