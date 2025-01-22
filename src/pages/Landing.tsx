@@ -20,63 +20,22 @@ const Landing = () => {
       </nav>
 
       {/* Hero Section */}
-      <HeroSection>
-        <main className="container relative z-10 mx-auto px-4 pt-24 sm:px-6 lg:pt-32">
-          <div className="mx-auto max-w-[800px] text-center">
-            {/* Main Heading */}
-            <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-              New Generation of Automation
-            </h1>
-
-            {/* Subheading with Gradient */}
-            <h2 className="mb-6 text-2xl font-semibold sm:text-3xl md:text-4xl">
-              <span className="text-foreground">Intent-Driven </span>
-              <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-                Fundraising Engagement
-              </span>
-            </h2>
-
-            {/* Description */}
-            <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-              Capture intent signals to gain full visibility into who and how to contact next — efficiently
-              increasing your revenue and shortening your fundraising cycle.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-6">
-              <Button
-                size="lg"
-                onClick={() => navigate("/signup")}
-                className="text-base sm:text-lg"
-              >
-                Try for Free
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-base sm:text-lg"
-              >
-                Learn More About Outraise
-              </Button>
-            </div>
-          </div>
-
-          {/* Dashboard Preview */}
-          <div className="mt-16 sm:mt-20 lg:mt-24">
-            <div className="relative mx-auto max-w-5xl">
-              <div className="overflow-hidden rounded-xl shadow-2xl ring-1 ring-gray-900/10">
-                <img
-                  src={theme === "dark" ? "/assets/outraise-dashboard-dark.png" : "/assets/outraise-dashboard-light.png"}
-                  alt="Outraise Dashboard"
-                  className="w-full"
-                  width={1200}
-                  height={675}
-                />
-              </div>
-            </div>
-          </div>
-        </main>
-      </HeroSection>
+      <HeroSection
+        title="New Generation of Automation"
+        subtitle={{
+          regular: "Intent-Driven ",
+          gradient: "Fundraising Engagement",
+        }}
+        description="Capture intent signals to gain full visibility into who and how to contact next — efficiently increasing your revenue and shortening your fundraising cycle."
+        ctaText="Try for Free"
+        ctaHref="/signup"
+        secondaryCtaText="Learn More About Outraise"
+        secondaryCtaHref="#features"
+        bottomImage={{
+          light: "/assets/outraise-dashboard-light.png",
+          dark: "/assets/outraise-dashboard-dark.png",
+        }}
+      />
 
       {/* Features Section */}
       <section className="container mx-auto px-4 py-20 sm:px-6">
