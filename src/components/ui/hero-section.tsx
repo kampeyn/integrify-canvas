@@ -34,20 +34,20 @@ export function HeroSection({
       <div className="container relative z-10 mx-auto px-4 pt-24 sm:px-6 lg:pt-32">
         <div className="mx-auto max-w-[800px] text-center">
           {/* Main Heading */}
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mb-8 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
             {title}
           </h1>
 
           {/* Subheading with Gradient */}
-          <h2 className="mb-6 text-2xl font-semibold sm:text-3xl md:text-4xl">
-            <span className="text-foreground">{subtitle.regular}</span>
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+          <h2 className="mb-8 text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
+            <span className="text-foreground">{subtitle.regular}</span>{" "}
+            <span className="bg-gradient-to-r from-purple-500 to-purple-300 bg-clip-text text-transparent">
               {subtitle.gradient}
             </span>
           </h2>
 
           {/* Description */}
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+          <p className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground/80 sm:text-xl">
             {description}
           </p>
 
