@@ -39,7 +39,7 @@ export function HeroSection({
             <div className={cn(
               "group rounded-full border border-black/5 bg-neutral-100 text-base transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800",
             )}>
-              <AnimatedShinyText className="inline-flex items-center justify-center px-6 py-2 text-lg sm:text-xl md:text-2xl">
+              <AnimatedShinyText className="inline-flex items-center justify-center px-6 py-2 text-2xl font-semibold sm:text-3xl md:text-4xl">
                 {title}
               </AnimatedShinyText>
             </div>
