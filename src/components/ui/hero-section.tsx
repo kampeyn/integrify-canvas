@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { Link } from "react-router-dom"
+import { AnimatedShinyText } from "./animated-shiny-text"
 
 interface HeroSectionProps {
   title: string
@@ -33,10 +34,10 @@ export function HeroSection({
     <section className="relative overflow-hidden bg-background pt-16">
       <div className="container relative z-10 mx-auto px-4 pt-24 sm:px-6 lg:pt-32">
         <div className="mx-auto max-w-[800px] text-center">
-          {/* Main Heading (now subtitle size) */}
-          <h1 className="mb-8 text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
+          {/* Main Heading (now with shiny animation) */}
+          <AnimatedShinyText className="mb-8 text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
             {title}
-          </h1>
+          </AnimatedShinyText>
 
           {/* Subheading with Gradient (now headline size) */}
           <h2 className="mb-8 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
