@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+@media (min-width: 640px) {
+  .sm-text-14 {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  .md-text-14 {
+    font-size: 14px;
+  }
+}
