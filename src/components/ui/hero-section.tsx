@@ -34,10 +34,16 @@ export function HeroSection({
     <section className="relative overflow-hidden bg-background pt-16">
       <div className="container relative z-10 mx-auto px-4 pt-24 sm:px-6 lg:pt-32">
         <div className="mx-auto max-w-[800px] text-center">
-          {/* Main Heading (now with shiny animation) */}
-          <AnimatedShinyText className="mb-8 text-2xl font-semibold sm:text-3xl md:text-4xl lg:text-5xl">
-            {title}
-          </AnimatedShinyText>
+          {/* Main Heading (now with pill design and shiny animation) */}
+          <div className="mb-8 flex justify-center">
+            <div className={cn(
+              "group rounded-full border border-black/5 bg-neutral-100 text-base transition-all ease-in hover:cursor-pointer hover:bg-neutral-200 dark:border-white/5 dark:bg-neutral-900 dark:hover:bg-neutral-800",
+            )}>
+              <AnimatedShinyText className="inline-flex items-center justify-center px-6 py-2 text-2xl font-semibold sm:text-3xl md:text-4xl">
+                {title}
+              </AnimatedShinyText>
+            </div>
+          </div>
 
           {/* Subheading with Gradient (now headline size) */}
           <h2 className="mb-8 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
